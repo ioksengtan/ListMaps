@@ -4,7 +4,7 @@ function initMap() {
           center: { lat: 24.790078397806973, lng: 121.07471724480152 },
         });
         // Create an array of alphabetical characters used to label the markers.
-        const labels = ["一本書店","B1"];
+        const labels = ["一","B1"];
         // Add some markers to the map.
         // Note: The code uses the JavaScript Array.prototype.map() method to
         // create an array of markers based on a given "locations" array.
