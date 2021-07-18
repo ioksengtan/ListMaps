@@ -34,6 +34,7 @@ function addMarker() {
 }
 
 function getGPSbyStoryID(story_id){
+  console.log(story_id);
   parameter = {
               url: sheetsUrl,
               //command:"getLandmarksByStory",
@@ -48,11 +49,13 @@ function getGPSbyStoryID(story_id){
               gps_locations.push(
                 {
                   lat:data_json.table[i].lat,
-                  lng:data_json.table[i].lng
+                  lng:data_json.table[i].lng,
+                  name:data_json.table[i].name,
+                  content:data_json.table[i].content,
+                  link:data_json.table[i].link
                 }
               )
             }
-            console.log('test');
             refreshMap(gps_locations);
            //addMarker({lat:25.0489782,lng:121.5208181});
          });
@@ -70,6 +73,7 @@ function addGPStoryList(div_id_to_add, data_to_append, where_to_add){
     gpstory_what = data_to_append.what;
     gpstory_where = data_to_append.where;
     gpstory_title = data_to_append.title;
+    gpstory_link = data_to_append.link;
     gpstory_avatar = data_to_append.avatar;
     gpstory_author = data_to_append.author;
     gpstory_tags = data_to_append.tags;
@@ -81,9 +85,9 @@ function addGPStoryList(div_id_to_add, data_to_append, where_to_add){
     html_reg += "   <div class=\"gpstory_info\">";
     html_reg += "      <div class=\"gpstory_header\">";
     html_reg += "      <input type=\"checkbox\" aria-label=\"Checkbox for following text input\">";
-    html_reg += "      <span class=\"gpstory_title\"><a href=\"javascript:getGPSbyStoryID("+ gpstory_story_id +")\">" + gpstory_what + " @ </span><span class=\"gpstory_location\">" + gpstory_where + "</a> </span>";
+    html_reg += "      <span class=\"gpstory_title\"><a href=\"javascript:getGPSbyStoryID("+ gpstory_story_id +")\">" + gpstory_title + "</a> (" + "<a href=\""+ gpstory_link +"\">link</a>" +")(<a href=\"\">add to map</a>)</span>";
     html_reg += "      </div>";
-    html_reg += "      <div class=\"gpstory_source\"><a href=\"\">"+gpstory_title + "</a></div>";
+    html_reg += "      <div class=\"gpstory_source\">"+gpstory_what + " @ </span><span class=\"gpstory_location\">" + gpstory_where + "</div>";
     html_reg += "      <div class=\"gpstory_author\">";
     html_reg += "         <a href=\"\">";
     html_reg += "         <img src=\"" + gpstory_avatar + "\" class=\"rounded-circle z-depth-0\" alt=\"avatar image\" height=\"35\"><span class=\"gpstory_author_name\">";
@@ -106,7 +110,7 @@ function addGPStoryList(div_id_to_add, data_to_append, where_to_add){
     html_reg += "         </ul>";
     html_reg += "      </div>";
     html_reg += "   </div>";
-    html_reg += "   <div class=\"gpstory_thumbnail\"><img src=\"" + gpstory_thumbnail + "\" /></div>";
+    //html_reg += "   <div class=\"gpstory_thumbnail\"><img src=\"" + gpstory_thumbnail + "\" /></div>";
     html_reg += "</div>";
     if(where_to_add == 'prepend'){
       $(div_id_to_add).prepend(html_reg);
@@ -130,7 +134,11 @@ function refreshMap(locations) {
       content: "<h1>test</h1>",
     });
     // Create an array of alphabetical characters used to label the markers.
-    const labels = ["一", "B1"];
+    let labels = [];
+    for (location_id in locations){
+      //const labels = ["", "B1"];
+      labels.push(locations[location_id].name);
+    }
     // Add some markers to the map.
     // Note: The code uses the JavaScript Array.prototype.map() method to
     // create an array of markers based on a given "locations" array.
@@ -144,7 +152,7 @@ function refreshMap(locations) {
         marker.addListener("click", () => {
             //map.setZoom(8);
             //map.setCenter(marker.getPosition());
-            infowindow.setContent(marker.getLabel());
+            infowindow.setContent(location.content + '<br/>' + '<a href=\"' + location.link + '\">link</a>');
             infowindow.open(map, marker);
             console.log(marker.getLabel());
 
