@@ -11,9 +11,28 @@
 }
 
 #map {
-  width: 40%;
+  height: 90%;
+  width: 50%;
 }
-#mapid { height: 50%; width:50%;}
+
+#maplist {
+  background-color:white;
+  position:absolute;
+  width:45%;
+  z-index: 99;
+  height:80%;
+  opacity: 0.9;
+  top:15%;
+  left:2%;
+  border-radius: 10px;
+  padding-top:1%;
+  overflow-y: scroll;
+  display:none;
+}
+
+#maplist li{
+  list-style-type: none;
+}
 /* Optional: Makes the sample page fill the window. */
 html,
 body {
@@ -24,7 +43,7 @@ body {
 }
   .right {
       height: 100%;
-      //display: block;
+      display: block;
       overflow-y: scroll;
   }
 

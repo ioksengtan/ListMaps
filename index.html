@@ -2,6 +2,15 @@
 <html>
    <head>
       <title>Marker Clustering</title>
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+  integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+  crossorigin=""></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+   <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+
       <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
       <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
       <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -13,7 +22,7 @@
    <body>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
          <div class="container-fluid">
-            <a class="navbar-brand" href="#">GPStory</a>
+            <a class="navbar-brand" href="">GPStory</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -26,10 +35,19 @@
                      <a class="nav-link" href="#">Blog</a>
                   </li>
                   <li class="nav-item">
+                     <a class="nav-link" href="javascript:renderMap()">testMap</a>
+                  </li>
+                  <li class="nav-item">
                      <a class="nav-link" href="#">API</a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="#">在地圖上串起身邊的故事</a>
+                     <a class="nav-link" href="#">在地圖上串起身邊的故事 用互動的方式說台灣的故事</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="stories.html">find Stories</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="landmarks.html">find landmarks</a>
                   </li>
                   <!--
                   <li class="nav-item dropdown">
@@ -62,85 +80,15 @@
             </div>
          </div>
       </nav>
-      <div class="containe-fluid" style="height:100%; width:100%;">
-         <div class="row" style="height:100%; width:100%;">
-            <div id="map" class="col left"></div>
-            <div id="maplist">
-              <button type="button" class="btn btn-primary">apply</button>
-              <br/>
-              <br/>
-                <ul>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                    <li><input type="checkbox" aria-label="Checkbox for following text input"><span>what</span>@<span>who</span>, name</li>
-                </ul>
-            </div>
-            <div class="col right" id="gpstory_main">
-               <div class="gpstory_catagory">
-                 category:
-                  <ul>
-                     <button type="button">book</button>
-                       <button type="button">blog</button>
-                  </ul>
-               </div>
-               <div id="gpsstory_list_all">
+      <h1>test</h1>
+        <div id="mapid" class="col"></div>
+         <div class="row d-flex justify-content-center" >
+            <h1>test</h1>
 
-
-
-             </div>
-            </div>
          </div>
-      </div>
+
       <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-      <script
-         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsiStpIlMr_0RhLo9gvJ_gUjjpCRvPXmk&callback=initMap&libraries=&v=weekly"
-         async
-         ></script>
+
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
    </body>
 </html>

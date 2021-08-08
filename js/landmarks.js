@@ -12,16 +12,6 @@ parameter = {
         };
         $(document).ready(
           function() {
-            var mymap = L.map('mapid').setView([51.505, -0.09], 13);
-              L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-              attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-              maxZoom: 18,
-              id: 'mapbox/streets-v11',
-              tileSize: 512,
-              zoomOffset: -1,
-              accessToken: 'pk.eyJ1IjoiaW9rc2VuZ3RhbiIsImEiOiJja3JkeTgxMHI1Z3B2MzFxcHM0NWo3cTEwIn0.kkcIlaMdiTpqqaCk6YpOgQ'
-          }).addTo(mymap);
-            /*
             $.get(appUrl, parameter, function(data) {
                      console.log(data);
                      data_json = JSON.parse(data);
@@ -30,7 +20,6 @@ parameter = {
                     }
                      //addMarker({lat:25.0489782,lng:121.5208181});
           })
-          */
         });
 
 function renderMap() {
