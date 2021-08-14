@@ -85,7 +85,7 @@ function getGPSbyStoryID(story_id){
 
               content_reg += '<li><input type="checkbox"><a href=\"\">'
               content_reg += data_json.table[i].name + '</a>';
-              content_reg += '<a href=\"javascript:spec_func('+data_json.table[i].landmark_id+')\">(specific_function)</a>'
+              content_reg += '<a href=\"javascript:spec_func('+data_json.table[i].landmark_id+')\">(add)</a>'
               content_reg += '</li>'
 
             }
@@ -126,7 +126,7 @@ function addmyappList(div_id_to_add, data_to_append, where_to_add, id_div){
     html_reg += '   <div class=\"accordion-item\">';
     html_reg += '     <h2 class=\"accordion-header\" id=\"heading_' + myapp_story_id +'\">';    			
     html_reg += '       <button onclick=javascript:getGPSbyStoryID('+ myapp_story_id +') class=\"accordion-button collapsed\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#collapse_'+myapp_story_id+'\" aria-expanded=\"true\" aria-controls=\"collapse_'+myapp_story_id+'\">';
-    html_reg += '           <input type=\"checkbox\">(type:'+ myapp_types +')<a href=\"javascript:getGPSbyStoryID('+ myapp_story_id +')\">' + myapp_title + '</a> <a href=\"javascript:spec_func('+ myapp_story_id +')\">(specific function)</a>';
+    html_reg += '           <input type=\"checkbox\">(type:'+ myapp_types +')<a href=\"javascript:getGPSbyStoryID('+ myapp_story_id +')\">' + myapp_title + '</a> <a href=\"javascript:spec_func('+ myapp_story_id +')\">(add)</a>';
     html_reg += '       </button>';
     html_reg += '     </h2>';
     html_reg += '     <div id=\"collapse_'+ myapp_story_id +'\" class=\"accordion-collapse collapse\" aria-labelledby=\"heading_'+myapp_story_id+'\" data-bs-parent=\"#accordionExample\">';
