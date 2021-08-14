@@ -16,7 +16,7 @@ parameter = {
                      console.log(data);
                      data_json = JSON.parse(data);
                      for(i in data_json.table){
-                       addGPStoryList(gpsstory_list_all,data_json.table[i],'prepend')
+                       addmyappList(gpsstory_list_all,data_json.table[i],'prepend')
                     }
                      //addMarker({lat:25.0489782,lng:121.5208181});
           })
@@ -79,12 +79,13 @@ function getGPSbyStoryID(story_id){
                   name:data_json.table[i].name,
                   content:data_json.table[i].content,
                   link:data_json.table[i].link,
+				  landmark_id:data_json.table[i].landmark_id,
                 }
               )
 
-              content_reg += '<li><a href=\"\">'
+              content_reg += '<li><input type="checkbox"><a href=\"\">'
               content_reg += data_json.table[i].name + '</a>';
-              content_reg += '<a href=\"\">(add to your story)</a>'
+              content_reg += '<a href=\"javascript:spec_func('+data_json.table[i].landmark_id+')\">(specific_function)</a>'
               content_reg += '</li>'
 
             }
@@ -105,66 +106,66 @@ function getGPSbyStoryID(story_id){
 
 
 
-function addGPStoryList(div_id_to_add, data_to_append, where_to_add, id_div){
+function addmyappList(div_id_to_add, data_to_append, where_to_add, id_div){
   //console.log(data_to_append);
-    gpstory_what = data_to_append.what;
-    gpstory_where = data_to_append.where;
-    gpstory_title = data_to_append.title;
-    gpstory_link = data_to_append.link;
-    gpstory_avatar = data_to_append.avatar;
-    gpstory_author = data_to_append.author;
-    gpstory_tags = data_to_append.tags;
-    gpstory_thumbnail = data_to_append.thumbnail;
-    gpstory_story_id = data_to_append.story_id;
-    gpstory_types = data_to_append.types;
+    myapp_what = data_to_append.what;
+    myapp_where = data_to_append.where;
+    myapp_title = data_to_append.title;
+    myapp_link = data_to_append.link;
+    myapp_avatar = data_to_append.avatar;
+    myapp_author = data_to_append.author;
+    myapp_tags = data_to_append.tags;
+    myapp_thumbnail = data_to_append.thumbnail;
+    myapp_story_id = data_to_append.story_id;
+    myapp_types = data_to_append.types;
 
     //html_reg = get_html_reg();
 
     html_reg = '';
     html_reg += '<div class=\"accordion\" id=\"accordionExample\">';
     html_reg += '   <div class=\"accordion-item\">';
-    html_reg += '     <h2 class=\"accordion-header\" id=\"heading_' + gpstory_story_id +'\">';
-    html_reg += '       <button onclick=javascript:getGPSbyStoryID('+ gpstory_story_id +') class=\"accordion-button collapsed\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#collapse_'+gpstory_story_id+'\" aria-expanded=\"true\" aria-controls=\"collapse_'+gpstory_story_id+'\">';
-    html_reg += '           (type:'+ gpstory_types +')<a href=\"javascript:getGPSbyStoryID('+ gpstory_story_id +')\">' + gpstory_title + '</a> <a href=\"\">(add to story)</a>';
+    html_reg += '     <h2 class=\"accordion-header\" id=\"heading_' + myapp_story_id +'\">';    			
+    html_reg += '       <button onclick=javascript:getGPSbyStoryID('+ myapp_story_id +') class=\"accordion-button collapsed\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#collapse_'+myapp_story_id+'\" aria-expanded=\"true\" aria-controls=\"collapse_'+myapp_story_id+'\">';
+    html_reg += '           <input type=\"checkbox\">(type:'+ myapp_types +')<a href=\"javascript:getGPSbyStoryID('+ myapp_story_id +')\">' + myapp_title + '</a> <a href=\"javascript:spec_func('+ myapp_story_id +')\">(specific function)</a>';
     html_reg += '       </button>';
     html_reg += '     </h2>';
-    html_reg += '     <div id=\"collapse_'+ gpstory_story_id +'\" class=\"accordion-collapse collapse\" aria-labelledby=\"heading_'+gpstory_story_id+'\" data-bs-parent=\"#accordionExample\">';
+    html_reg += '     <div id=\"collapse_'+ myapp_story_id +'\" class=\"accordion-collapse collapse\" aria-labelledby=\"heading_'+myapp_story_id+'\" data-bs-parent=\"#accordionExample\">';
     html_reg += '       <div class=\"accordion-body\">';
     html_reg += '       </div>';
     html_reg += '     </div>';
     html_reg += '   </div>';
     html_reg += ' </div>';
     /*
-    html_reg += "<div class=\"gpstory_list\">";
-    html_reg += "   <div class=\"gpstory_info\">";
-    html_reg += "      <div class=\"gpstory_source\">"+gpstory_what + " @ </span><span class=\"gpstory_location\">" + gpstory_where + "</div>";
-    html_reg += "      <div class=\"gpstory_header\">";
+    html_reg += "<div class=\"myapp_list\">";
+    html_reg += "   <div class=\"myapp_info\">";
+    html_reg += "      <div class=\"myapp_source\">"+myapp_what + " @ </span><span class=\"myapp_location\">" + myapp_where + "</div>";
+    html_reg += "      <div class=\"myapp_header\">";
     html_reg += "      <input type=\"checkbox\" aria-label=\"Checkbox for following text input\">";
-    switch(gpstory_types){
+    switch(myapp_types){
       case 'youtube':
-        html_reg += "      <span class=\"gpstory_title\"><a href=\"javascript:getGPSbyStoryID("+ gpstory_story_id +")\">" + gpstory_title + "</a> <br/></span><span>(" + "<a href=\""+ gpstory_link +"\"><img src=\"youtube_icon.png\"/></a>" +")(<a href=\"\"><img src=\"add_list.png\"/></a>)</span>";
+        html_reg += "      <span class=\"myapp_title\"><a href=\"javascript:getGPSbyStoryID("+ myapp_story_id +")\">" + myapp_title + "</a> <br/></span><span>(" + "<a href=\""+ myapp_link +"\"><img src=\"youtube_icon.png\"/></a>" +")(<a href=\"\"><img src=\"add_list.png\"/></a>)</span>";
         break;
       case 'book':
-        html_reg += "      <span class=\"gpstory_title\"><a href=\"javascript:getGPSbyStoryID("+ gpstory_story_id +")\">" + gpstory_title + "</a> <br/></span><span>(" + "<a href=\""+ gpstory_link +"\"><img src=\"book_icon.png\"/></a>" +")(<a href=\"\"><img src=\"add_list.png\"/></a>)</span>";
+        html_reg += "      <span class=\"myapp_title\"><a href=\"javascript:getGPSbyStoryID("+ myapp_story_id +")\">" + myapp_title + "</a> <br/></span><span>(" + "<a href=\""+ myapp_link +"\"><img src=\"book_icon.png\"/></a>" +")(<a href=\"\"><img src=\"add_list.png\"/></a>)</span>";
         break;
       case 'blog':
-        html_reg += "      <span class=\"gpstory_title\"><a href=\"javascript:getGPSbyStoryID("+ gpstory_story_id +")\">" + gpstory_title + "</a> <br/></span><span>(" + "<a href=\""+ gpstory_link +"\"><img src=\"webpage_icon.png\"/></a>" +")(<a href=\"\"><img src=\"add_list.png\"/></a>)</span>";
+        html_reg += "      <span class=\"myapp_title\"><a href=\"javascript:getGPSbyStoryID("+ myapp_story_id +")\">" + myapp_title + "</a> <br/></span><span>(" + "<a href=\""+ myapp_link +"\"><img src=\"webpage_icon.png\"/></a>" +")(<a href=\"\"><img src=\"add_list.png\"/></a>)</span>";
         break;
       default:
-        html_reg += "      <span class=\"gpstory_title\"><a href=\"javascript:getGPSbyStoryID("+ gpstory_story_id +")\">" + gpstory_title + "</a> <br/></span><span>(" + "<a href=\""+ gpstory_link +"\"><img src=\"webpage_icon.png\"/></a>" +")(<a href=\"\"><img src=\"add_list.png\"/></a>)</span>";
+        html_reg += "      <span class=\"myapp_title\"><a href=\"javascript:getGPSbyStoryID("+ myapp_story_id +")\">" + myapp_title + "</a> <br/></span><span>(" + "<a href=\""+ myapp_link +"\"><img src=\"webpage_icon.png\"/></a>" +")(<a href=\"\"><img src=\"add_list.png\"/></a>)</span>";
   }
     html_reg += "      </div>";
 
-    html_reg += "      <div class=\"gpstory_author\">";
+    html_reg += "      <div class=\"myapp_author\">";
     html_reg += "         <a href=\"\">";
-    html_reg += "         <img src=\"" + gpstory_avatar + "\" class=\"rounded-circle z-depth-0\" alt=\"avatar image\" height=\"35\"><span class=\"gpstory_author_name\">";
-    html_reg += "         " + gpstory_author ;
+    html_reg += "         <img src=\"" + myapp_avatar + "\" class=\"rounded-circle z-depth-0\" alt=\"avatar image\" height=\"35\"><span class=\"myapp_author_name\">";
+    html_reg += "         " + myapp_author ;
     html_reg += "         </span></a>";
     html_reg += "      </div>";
-    html_reg += "      <div class=\"gpstory_tags\">";
+    html_reg += "      <div class=\"myapp_tags\">";
     html_reg += "         <ul>";
 
-    tags = gpstory_tags.trim().split(",");
+    tags = myapp_tags.trim().split(",");
     for(i=0;i<tags.length;i++){
         if(tags[i] == ''){
           continue;
@@ -178,7 +179,7 @@ function addGPStoryList(div_id_to_add, data_to_append, where_to_add, id_div){
     html_reg += "         </ul>";
     html_reg += "      </div>";
     html_reg += "   </div>";
-    //html_reg += "   <div class=\"gpstory_thumbnail\"><img src=\"" + gpstory_thumbnail + "\" /></div>";
+    //html_reg += "   <div class=\"myapp_thumbnail\"><img src=\"" + myapp_thumbnail + "\" /></div>";
     html_reg += "</div>";
     */
 
@@ -193,6 +194,14 @@ function addGPStoryList(div_id_to_add, data_to_append, where_to_add, id_div){
 
   */
 }
+
+function addStoriesToLayer(locations){
+	var markers = L.markerClusterGroup();
+	locations.map(item => L.marker(new L.LatLng(item.lat, item.lng)))
+           .forEach(item => markers.addLayer(item));
+    
+}
+
 function refreshMap(locations) {
   //mymap.invalidateSize();
   //var mymap = L.map('map').setView([25.1130643, 121.5227629], 7);
@@ -210,6 +219,7 @@ mymap = L.map('map', {
   zoom: 7,
   layers: [streets, markers]
 });*/
+
 var streets = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
 maxZoom: 18,
@@ -224,17 +234,24 @@ locations.map(item => L.marker(new L.LatLng(item.lat, item.lng)))
            //.forEach(item => mymap.addLayer(item));
            .forEach(item => markers.addLayer(item));
 var baseMaps = {
-    "Streets": streets
+//    "Streets": streets
 };
 
 var overlayMaps = {
     "Landmarks": markers
 };
+/*
+mymap.eachLayer(function (layer) {
+    mymap.removeLayer(layer);
+	//console.log(layer);
+});
+*/
+//mymap.clearLayers();
 mymap.addLayer(markers);
 //mymap.rem
-mymap.removeControl(p_control);
+//mymap.removeControl(p_control);
 //p_control.removeFrom(mymap);
-p_control = L.control.layers(baseMaps, overlayMaps).addTo(mymap);
+//p_control = L.control.layers(baseMaps, overlayMaps).addTo(mymap);
   /*
   L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
   attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -389,7 +406,8 @@ function initMap() {
              .forEach(item => markers.addLayer(item));
 
 mymap = L.map('map', {
-  center: [25.1130643, 121.5227629],
+  //center: [25.1130643, 121.5227629],
+  center:[39.921640, -75.412165],
   zoom: 7,
   layers: [streets]
 });
@@ -403,7 +421,7 @@ var baseMaps = {
     "Streets": streets
 };
 p_control = L.control.layers(baseMaps);
-p_control.addTo(mymap);
+//p_control.addTo(mymap);
 //p_control.removeFrom(mymap);
 
 /*
